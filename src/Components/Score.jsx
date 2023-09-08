@@ -1,11 +1,22 @@
-function Score(props) {
+import React from "react";
+
+function Score({ userName }) {
     return (
-        <div>
-            <label htmlFor="">TU</label>
-            <p id="score">{props.pj}</p>
+        <div className="score">
+            {userName ? (
+                <>
+                    <label htmlFor="userScore">{userName}</label>
+                    <p id="userScore"></p>
+                </>
+            ) : ( 
+                <>
+                    <label htmlFor="userScore">TU</label>
+                    <p id="userScore"></p>
+                </>
+            )}
             -
-            <label htmlFor="">COMPUTADORA</label>
-            <p id="score">{props.pc}</p>
+            <label htmlFor="computerScore">COMPUTADORA</label>
+            <p id="computerScore"></p>
         </div>
     );
 }

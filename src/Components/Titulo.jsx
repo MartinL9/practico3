@@ -4,7 +4,7 @@ import { faUserXmark } from "@fortawesome/free-solid-svg-icons";
 function Titulo() {
     return (
         <div>
-            <h1>Piedra, Papel o Tijera</h1>
+            <h1>PIEDRA, PAPEL O TIJERA</h1>
 
             <button>
                 <FontAwesomeIcon icon={faUserXmark} />
