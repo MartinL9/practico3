@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <Titulo />
-      <UserInput setUserName={setUserName} />
+      <UserInput userName={userName} setUserName={setUserName} />
       <Score userName={userName} />
       <ResultMatch />
       <BtnReset />
