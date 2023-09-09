@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowTurnDown, faCheck } from '@fortawesome/free-solid-svg-icons';
 
-const UserInput = ({ userName, setUserName }) => {
+const UserInput = ({ userName, setUserName , setIsUsernameValid}) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [isInputVisible, setInputVisible] = useState(true);
     const bannedWords = ['asesino', 'asesinato', 'masacre', 'suicido', 'canibal', 'decapitar', 'matar', 'cadaver', 'matanza', 'crucificado','fascista', 'nazi', 'esclavo','hitler'];
@@ -25,6 +25,7 @@ const UserInput = ({ userName, setUserName }) => {
         if (validationError === '') {
             setErrorMessage('');
             setInputVisible(false);
+            setIsUsernameValid(true);
         } else {
             setErrorMessage(validationError);
         }

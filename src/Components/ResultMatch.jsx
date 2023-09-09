@@ -1,6 +1,24 @@
-function ResultMatch() {
+function ResultMatch({ playerChoice, pcChoice, userName }) {
+    let result = '';
+
+    if(playerChoice === pcChoice) {
+        result = '¡Empate!';
+    } else if (
+        (playerChoice === 'Piedra' && pcChoice === 'Tijera') ||
+        (playerChoice === 'Papel' && pcChoice === 'Piedra') ||
+        (playerChoice === 'Tijera' && pcChoice === 'Papel') 
+    ) {
+        result = '¡Gana ' + userName + '!';
+    } else {
+        result = '¡Gana la Computadora!'
+    }
+
     return (
-        <p id="result"></p>
+        <div>
+            <p>{userName} eligió: {playerChoice}</p>
+            <p>Computadora eligió: {pcChoice}</p>
+            <p>Resultado: {result}</p>
+        </div>
     );
 }
 
