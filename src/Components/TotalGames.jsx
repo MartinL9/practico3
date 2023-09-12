@@ -1,9 +1,13 @@
-function TotalGames() {
+function TotalGames({ userName }) {
     return (
-        <div>
-            <p>Juegos Totales</p>
-            <span></span>
-        </div>
+        <>
+            {userName && (
+                <div>
+                    <p>Juegos Totales</p>
+                    <span></span>
+                </div>
+            )}
+        </>
     );
 }
 

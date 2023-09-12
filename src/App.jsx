@@ -3,11 +3,12 @@ import { useState } from 'react';
 import Titulo from './Components/Titulo';
 import UserInput from './Components/UserInput';
 import Score from './Components/Score';
-import BtnReset from './Components/BtnReset';
 import ResultMatch from './Components/ResultMatch';
 import BtnChoices from './Components/BtnChoices';
 import HistoryGames from './Components/HistoryGames';
 import TotalGames from './Components/TotalGames';
+import TotalRounds from './Components/TotalRounds';
+import GameOutCome from './Components/GameOutCome';
 
 function App() {
   const [userName, setUserName] = useState('');
@@ -17,7 +18,13 @@ function App() {
   const [userScore, setUserScore] = useState(0);
   const [pcScore, setPcScore] = useState(0);
   const [hasMadeChoice, setHasMadeChoice] = useState(false);
+  const [round, setRound] = useState(0);
   
+  const handleStartGame = (playerName) => {
+    setUserName(playerName);
+    setIsUsernameValid(true);
+  }; 
+
   const detResultWin = (playerChoice, pcChoice) => {
     if(playerChoice === pcChoice) {
       return '¡Empate!';
@@ -27,8 +34,10 @@ function App() {
       (playerChoice === 'Tijera' && pcChoice === 'Papel') 
     ) {
       setUserScore(userScore + 1);
+      return '¡Ganaste!'
     } else {
       setPcScore(pcScore + 1);
+      return '¡Perdiste!'
     }
   }
 
@@ -37,20 +46,38 @@ function App() {
     setPcChoice(pcChoice);
     const result = detResultWin(playerChoice, pcChoice);
     setHasMadeChoice(true);
+    setRound(round + 1);
+  }
+  
+  const handleGameReset = () => {
+    setPlayerChoice(null);
+    setPcChoice(null);
+    setUserScore(0);
+    setPcScore(0);
+    setHasMadeChoice(false);
+    setRound(0);
+  }
+
+  const handleAllReset = () => {
+    handleGameReset();
+    setUserName('');
+    setIsUsernameValid(false);
   }
 
   return (
     <div className="App">
-      <Titulo />
-      <UserInput 
-        userName={userName} 
-        setUserName={setUserName} 
-        setIsUsernameValid={setIsUsernameValid}
-      />
+      <Titulo onAllReset={handleAllReset} />
+      {!userName && (
+        <UserInput onStartGame={handleStartGame} />
+      )}
       <Score 
         userName={userName} 
         userScore={userScore} 
         pcScore={pcScore}
+      />
+      <BtnChoices 
+        onPlayerChoice={handlePlayersChoice} 
+        isUsernameValid={isUsernameValid}
       />
       {hasMadeChoice && (
         <ResultMatch 
@@ -59,14 +86,20 @@ function App() {
           userName={userName}
         />
       )}
-      <BtnReset />
-      <BtnChoices 
-        onPlayerChoice={handlePlayersChoice} 
-        isUsernameValid={isUsernameValid}
-        
+      <TotalRounds 
+        userName={userName}
+        round={round} 
+        userScore={userScore} 
+        pcScore={pcScore}
       />
-      <HistoryGames />
-      <TotalGames />
+      {round === 5 && hasMadeChoice && (
+        <GameOutCome 
+          userName={userName} 
+          onGameReset={handleGameReset} 
+        />
+      )}
+      <HistoryGames userName={userName}/>
+      <TotalGames userName={userName}/>
     </div>
   );
 }

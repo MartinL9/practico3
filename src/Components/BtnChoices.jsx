@@ -26,23 +26,27 @@ function BtnChoices({ onPlayerChoice, isUsernameValid }) {
 
     return (
         <div className="btnContainer">
-            <div className="btnGroup">
-                <button className="btnSelect" onClick={() => handleButtonClick('Piedra')} disabled={!isUsernameValid}>
-                    <FontAwesomeIcon icon={faHandBackFist} className="fa-10x iconCenter" />
-                </button>
-            </div>
+            {isUsernameValid && (
+                <>
+                <div className="btnGroup">
+                    <button className="btnSelect" onClick={() => handleButtonClick('Piedra')} >
+                        <FontAwesomeIcon icon={faHandBackFist} className="fa-10x iconCenter" />
+                    </button>
+                </div>
 
-            <div className="btnGroup">
-                <button className="btnSelect" onClick={() => handleButtonClick('Papel')} disabled={!isUsernameValid}>
-                    <FontAwesomeIcon icon={faHand} className="fa-10x iconCenter" />
-                </button>
-            </div>
+                <div className="btnGroup">
+                    <button className="btnSelect" onClick={() => handleButtonClick('Papel')} >
+                        <FontAwesomeIcon icon={faHand} className="fa-10x iconCenter" />
+                    </button>
+                </div>  
 
-            <div className="btnGroup">
-                <button className="btnSelect" onClick={() => handleButtonClick('Tijera')} disabled={!isUsernameValid}>
-                    <FontAwesomeIcon icon={faHandScissors} className="fa-10x iconCenter" />
-                </button>
-            </div>
+                <div className="btnGroup">
+                    <button className="btnSelect" onClick={() => handleButtonClick('Tijera')} >
+                        <FontAwesomeIcon icon={faHandScissors} className="fa-10x iconCenter" />
+                    </button>
+                </div>
+                </>
+            )}
         </div>
     );
 }

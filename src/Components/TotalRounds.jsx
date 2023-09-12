@@ -1,23 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 
-function TotalRounds({ userScore, pcScore, userName }) {
-    let gameResult = '';
-    const[round, setRound] = useState(1);
+function TotalRounds({ userName, round, userScore, pcScore }) {
     const maxRounds = 5;
 
-    if(round === maxRounds) {
-        if (userScore > pcScore) {
-            gameResult = '¡Ganador: ' + userName ;
-        } else if (pcScore > userScore) {
-            gameResult = 'Ganador: Computadora';
-        } 
-    } else {
-        setRound(round + 1);
-    }
+    const adjustedRound = round - Math.min(userScore, pcScore);
 
     return (
-        <p>test: {gameResult}</p>
+        <>
+            {userName && (
+                <p>Ronda: {adjustedRound}/{maxRounds}</p>
+            )}
+        </>
     );
-};
+}
 
 export default TotalRounds;

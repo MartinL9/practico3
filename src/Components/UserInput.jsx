@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowTurnDown, faCheck } from '@fortawesome/free-solid-svg-icons';
 
-const UserInput = ({ userName, setUserName , setIsUsernameValid}) => {
-    const [errorMessage, setErrorMessage] = useState('');
+const UserInput = ({ onStartGame }) => {
+    const [userName, setUserName] = useState('');
+    const [inputError, setInputError] = useState('');
     const [isInputVisible, setInputVisible] = useState(true);
     const bannedWords = ['asesino', 'asesinato', 'masacre', 'suicido', 'canibal', 'decapitar', 'matar', 'cadaver', 'matanza', 'crucificado','fascista', 'nazi', 'esclavo','hitler'];
 
     const handleInputChange = (e) => {
-        const inputText = e.target.value;
-        setUserName(inputText);
+        setUserName(e.target.value);
+        setInputError('');
     }
 
     const userSubmission = () => {
@@ -23,11 +24,11 @@ const UserInput = ({ userName, setUserName , setIsUsernameValid}) => {
             '';
 
         if (validationError === '') {
-            setErrorMessage('');
+            setInputError('');
             setInputVisible(false);
-            setIsUsernameValid(true);
+            onStartGame(userName);
         } else {
-            setErrorMessage(validationError);
+            setInputError(validationError);
         }
     };
 
@@ -51,7 +52,7 @@ const UserInput = ({ userName, setUserName , setIsUsernameValid}) => {
                     </button>
                 </>
             ) : null }
-            {errorMessage && <div className="error">{errorMessage}</div>}
+            {inputError && <p>{inputError}</p>}
         </div>
     );
 };
