@@ -1,60 +1,116 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowTurnDown, faCheck } from '@fortawesome/free-solid-svg-icons';
+import styled from 'styled-components';
 
 const UserInput = ({ onStartGame }) => {
-    const [userName, setUserName] = useState('');
+    const [playerName, setplayerName] = useState('');
     const [inputError, setInputError] = useState('');
     const [isInputVisible, setInputVisible] = useState(true);
     const bannedWords = ['asesino', 'asesinato', 'masacre', 'suicido', 'canibal', 'decapitar', 'matar', 'cadaver', 'matanza', 'crucificado','fascista', 'nazi', 'esclavo','hitler'];
 
     const handleInputChange = (e) => {
-        setUserName(e.target.value);
+        setplayerName(e.target.value);
         setInputError('');
     }
 
     const userSubmission = () => {
-        const containBw = bannedWords.some((word) => userName.toLowerCase().includes(word.toLowerCase()));
-        const trimmedUserName = userName.trim();
+        const containBw = bannedWords.some((word) => playerName.toLowerCase().includes(word.toLowerCase()));
+        const trimmedplayerName = playerName.trim();
 
         const validationError = 
-            trimmedUserName === '' ? 'Por favor, ingrese un nombre.' :
-            trimmedUserName.length > 20 ? 'Por favor, ingrese un nombre de hasta 20 caracteres.' :
+            trimmedplayerName === '' ? 'Por favor, ingrese un nombre.' :
+            trimmedplayerName.length > 20 ? 'Por favor, ingrese un nombre de hasta 20 caracteres.' :
             containBw ? 'Por favor, ingrese un usuario sin palabras prohibidas.' :
             '';
 
         if (validationError === '') {
             setInputError('');
             setInputVisible(false);
-            onStartGame(userName);
+            onStartGame(playerName);
         } else {
             setInputError(validationError);
         }
     };
 
     return (
-        <div className="userNameBox">
+        <MyDivContainer>
             {isInputVisible ? ( 
                 <>
-                    <p id="pInput">Ingrese un nombre para jugar</p>
-                    <FontAwesomeIcon icon={faArrowTurnDown} />
-                    <input 
+                    <MyP>Ingrese un nombre para jugar</MyP>
+                    <MyI icon={faArrowTurnDown} />
+                    <MyInputText 
                         type="text"
                         id="textInput"
                         placeholder="Ingrese un nombre"
                         autoComplete="off"
-                        value={userName}
+                        value={playerName}
                         onChange={handleInputChange}
                     >
-                    </input>
-                    <button className="btnInput" id="submitBtn" onClick={userSubmission}>
+                    </MyInputText>
+                    <MyInputButton onClick={userSubmission}>
                         <FontAwesomeIcon icon={faCheck}/>
-                    </button>
+                    </MyInputButton>
                 </>
             ) : null }
             {inputError && <p>{inputError}</p>}
-        </div>
+        </MyDivContainer>
     );
 };
 
 export default UserInput;
+
+const MyDivContainer = styled.div`
+    text-align: center;
+    margin: 20px auto;
+`
+
+const MyInputText = styled.input`
+    display: flex;
+    width: 350px;
+    padding: 10px;
+    margin: 10px auto;
+    font-size: x-large;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: var(--main-gray);
+    border: solid 2px var(--main-red);
+    border-radius: 8px;
+    color: var(--main-white);
+    transition: border 0.3s ease-in-out;
+
+    &:hover {
+        border-color: var(--main-white);
+    }
+`
+const MyP = styled.p` 
+    display: inline;
+    margin-right: 10px;
+`
+
+const MyI = styled(FontAwesomeIcon)`
+    vertical-align: middle;
+    margin-top: 24px;
+`
+
+const MyInputButton = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 6px;
+    height: 50px;
+    width: 50px;
+    margin: auto;
+    box-sizing: border-box;
+    border-radius: 50%;
+    font-size: xx-large;
+    cursor: pointer;
+    border: solid 2px var(--main-red);
+    color: var(--main-red);
+    transition: background-color 0.3s ease-in;
+
+    &:hover {
+        background-color: var(--main-red);
+        color: var(--main-white);
+    }
+`

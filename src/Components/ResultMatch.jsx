@@ -2,7 +2,7 @@ function ResultMatch({ playerChoice, pcChoice, userName }) {
     let result = '';
 
     if(playerChoice === pcChoice) {
-        result = '¡Empate!';
+        result = '¡Empate vuelve a jugar!';
     } else if (
         (playerChoice === 'Piedra' && pcChoice === 'Tijera') ||
         (playerChoice === 'Papel' && pcChoice === 'Piedra') ||

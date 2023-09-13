@@ -19,6 +19,8 @@ function App() {
   const [pcScore, setPcScore] = useState(0);
   const [hasMadeChoice, setHasMadeChoice] = useState(false);
   const [round, setRound] = useState(0);
+  const [winner, setWinner] = useState(null);
+  const [btnDisabled, setBtnDisabled] = useState(false);
   
   const handleStartGame = (playerName) => {
     setUserName(playerName);
@@ -27,16 +29,14 @@ function App() {
 
   const detResultWin = (playerChoice, pcChoice) => {
     if(playerChoice === pcChoice) {
-      return '¡Empate!';
+      return '¡Empate vuelve a jugar!';
     } else if (
       (playerChoice === 'Piedra' && pcChoice === 'Tijera') ||
       (playerChoice === 'Papel' && pcChoice === 'Piedra') ||
       (playerChoice === 'Tijera' && pcChoice === 'Papel') 
     ) {
-      setUserScore(userScore + 1);
       return '¡Ganaste!'
     } else {
-      setPcScore(pcScore + 1);
       return '¡Perdiste!'
     }
   }
@@ -44,9 +44,33 @@ function App() {
   const handlePlayersChoice = (playerChoice, pcChoice) => {
     setPlayerChoice(playerChoice);
     setPcChoice(pcChoice);
-    const result = detResultWin(playerChoice, pcChoice);
+    
+    const roundResult = detResultWin(playerChoice, pcChoice);
+
+    if (roundResult === '¡Ganaste!') {
+      setUserScore((prevUserScore) => prevUserScore + 1);
+    } else if (roundResult === '¡Perdiste!') {
+      setPcScore(pcScore + 1);
+    }
+
     setHasMadeChoice(true);
-    setRound(round + 1);
+
+    if (roundResult !== '¡Empate vuelve a jugar!') {
+      setRound((prevRound) => prevRound + 1);
+    }
+
+    if (round === 4) {
+      if(userScore > pcScore) {
+        setWinner(userName);
+      } else if (pcScore > userScore) {
+        setWinner('Computadora');
+      }
+      if (roundResult !== '¡Empate vuelve a jugar!') {
+        setBtnDisabled(true);
+      }
+    } else if (round === 5) {
+      setBtnDisabled(true);
+    }
   }
   
   const handleGameReset = () => {
@@ -56,6 +80,7 @@ function App() {
     setPcScore(0);
     setHasMadeChoice(false);
     setRound(0);
+    setBtnDisabled(false);
   }
 
   const handleAllReset = () => {
@@ -68,7 +93,9 @@ function App() {
     <div className="App">
       <Titulo onAllReset={handleAllReset} />
       {!userName && (
-        <UserInput onStartGame={handleStartGame} />
+        <UserInput 
+          onStartGame={handleStartGame} 
+        />
       )}
       <Score 
         userName={userName} 
@@ -78,6 +105,7 @@ function App() {
       <BtnChoices 
         onPlayerChoice={handlePlayersChoice} 
         isUsernameValid={isUsernameValid}
+        btnDisabled={btnDisabled}
       />
       {hasMadeChoice && (
         <ResultMatch 
@@ -88,13 +116,12 @@ function App() {
       )}
       <TotalRounds 
         userName={userName}
-        round={round} 
-        userScore={userScore} 
-        pcScore={pcScore}
+        round={round}
       />
       {round === 5 && hasMadeChoice && (
         <GameOutCome 
-          userName={userName} 
+          userName={userName}
+          winner={winner} 
           onGameReset={handleGameReset} 
         />
       )}

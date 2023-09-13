@@ -1,14 +1,11 @@
 import React from "react";
 
-function TotalRounds({ userName, round, userScore, pcScore }) {
+function TotalRounds({ userName, round }) {
     const maxRounds = 5;
-
-    const adjustedRound = round - Math.min(userScore, pcScore);
-
     return (
         <>
             {userName && (
-                <p>Ronda: {adjustedRound}/{maxRounds}</p>
+                <p>Ronda: {round}/{maxRounds}</p>
             )}
         </>
     );
