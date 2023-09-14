@@ -14,11 +14,11 @@ function ResultMatch({ playerChoice, pcChoice, userName }) {
     }
 
     return (
+        userName && (
         <div>
-            <p>{userName} eligió: {playerChoice}</p>
-            <p>Computadora eligió: {pcChoice}</p>
             <p>Resultado: {result}</p>
         </div>
+        )
     );
 }
 

@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Titulo from './Components/Titulo';
 import UserInput from './Components/UserInput';
 import Score from './Components/Score';
@@ -9,6 +9,7 @@ import HistoryGames from './Components/HistoryGames';
 import TotalGames from './Components/TotalGames';
 import TotalRounds from './Components/TotalRounds';
 import GameOutCome from './Components/GameOutCome';
+import MatchBoard from './Components/MatchBoard';
 
 function App() {
   const [userName, setUserName] = useState('');
@@ -21,6 +22,9 @@ function App() {
   const [round, setRound] = useState(0);
   const [winner, setWinner] = useState(null);
   const [btnDisabled, setBtnDisabled] = useState(false);
+  const [totalGames, setTotalGames] = useState(0);
+  const [userW, setUserW] = useState(0);
+  const [pcW, setPcW] = useState(0);
   
   const handleStartGame = (playerName) => {
     setUserName(playerName);
@@ -47,32 +51,53 @@ function App() {
     
     const roundResult = detResultWin(playerChoice, pcChoice);
 
-    if (roundResult === '¡Ganaste!') {
-      setUserScore((prevUserScore) => prevUserScore + 1);
-    } else if (roundResult === '¡Perdiste!') {
-      setPcScore(pcScore + 1);
-    }
-
+    setUserScore((prevUserScore) => {
+      if (roundResult === '¡Ganaste!') {
+        return prevUserScore + 1;
+      }
+      return prevUserScore;
+    });
+  
+    setPcScore((prevPcScore) => {
+      if (roundResult === '¡Perdiste!') {
+        return prevPcScore + 1;
+      }
+      return prevPcScore;
+    });
+  
     setHasMadeChoice(true);
 
     if (roundResult !== '¡Empate vuelve a jugar!') {
       setRound((prevRound) => prevRound + 1);
     }
-
-    if (round === 4) {
-      if(userScore > pcScore) {
-        setWinner(userName);
-      } else if (pcScore > userScore) {
-        setWinner('Computadora');
-      }
-      if (roundResult !== '¡Empate vuelve a jugar!') {
-        setBtnDisabled(true);
-      }
+  }
+  
+  useEffect(() => {
+    if (userScore === 3) {
+      setWinner(userName);
+      setBtnDisabled(true);
+    } else if (pcScore === 3) {
+      setWinner('Computadora');
+      setBtnDisabled(true);
     } else if (round === 5) {
       setBtnDisabled(true);
     }
-  }
+
+    if (winner !== null) {
+      setTotalGames((prevTotalGames) => prevTotalGames + 1);
+    }
+  }, [userName, userScore, pcScore, round, winner]);
   
+  useEffect(() => {
+    if (winner !== null) {
+      if (winner === userName) {
+        setUserW((prevUserW) => prevUserW + 1);
+      } else {
+        setPcW((prevPcW) => prevPcW + 1);
+      }
+    }
+  }, [winner, userName]);
+
   const handleGameReset = () => {
     setPlayerChoice(null);
     setPcChoice(null);
@@ -81,12 +106,16 @@ function App() {
     setHasMadeChoice(false);
     setRound(0);
     setBtnDisabled(false);
+    setWinner(null);
   }
 
   const handleAllReset = () => {
     handleGameReset();
     setUserName('');
     setIsUsernameValid(false);
+    setTotalGames(0);
+    setUserW(0);
+    setPcW(0);
   }
 
   return (
@@ -97,17 +126,22 @@ function App() {
           onStartGame={handleStartGame} 
         />
       )}
+      {hasMadeChoice && (
+        <MatchBoard userChoice={playerChoice} isUser={true} pcChoice={pcChoice} />
+      )}
       <Score 
         userName={userName} 
         userScore={userScore} 
         pcScore={pcScore}
       />
-      <BtnChoices 
-        onPlayerChoice={handlePlayersChoice} 
-        isUsernameValid={isUsernameValid}
-        btnDisabled={btnDisabled}
-      />
-      {hasMadeChoice && (
+      {winner === null && (
+          <BtnChoices 
+            onPlayerChoice={handlePlayersChoice} 
+            isUsernameValid={isUsernameValid}
+            btnDisabled={btnDisabled}
+          />
+          )}
+      {hasMadeChoice && winner === null && (
         <ResultMatch 
           playerChoice={playerChoice} 
           pcChoice={pcChoice} 
@@ -118,15 +152,15 @@ function App() {
         userName={userName}
         round={round}
       />
-      {round === 5 && hasMadeChoice && (
+      {(round === 5 || userScore === 3 || pcScore === 3) && hasMadeChoice && (
         <GameOutCome 
           userName={userName}
           winner={winner} 
           onGameReset={handleGameReset} 
         />
       )}
-      <HistoryGames userName={userName}/>
-      <TotalGames userName={userName}/>
+      <HistoryGames userName={userName} userW={userW} pcW={pcW} />
+      <TotalGames userName={userName} totalGames={totalGames} />
     </div>
   );
 }

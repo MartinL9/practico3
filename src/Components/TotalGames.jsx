@@ -1,10 +1,12 @@
-function TotalGames({ userName }) {
+import React from "react";
+
+function TotalGames({ userName, totalGames }) {
     return (
         <>
             {userName && (
                 <div>
                     <p>Juegos Totales</p>
-                    <span></span>
+                    <span>{totalGames}</span>
                 </div>
             )}
         </>

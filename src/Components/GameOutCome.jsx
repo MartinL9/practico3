@@ -9,7 +9,7 @@ const GameOutcome = ({ userName, winner, onGameReset }) => {
             {userName && (
                 <div className="game-outcome">
                     <h2>¡{winner} ganó el juego!</h2>
-                    <p>El juego ha terminado, Reinicie el juego para volver a jugar.</p>
+                    <p>El juego ha terminado, Reinicie para volver a jugar.</p>
                     <RePlayBtn onClick={onGameReset}>
                         <FontAwesomeIcon icon={faArrowsRotate} />
                     </RePlayBtn>
