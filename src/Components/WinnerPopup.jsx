@@ -52,7 +52,7 @@ const WinnerDiv = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 40px 40px;
+    padding: 30px 30px;
     border: 5px solid var(--main-red);
     border-radius: 5px;
     font-size: 3rem;
@@ -93,12 +93,19 @@ const CloseButton = styled.button`
     box-shadow: var(--main-red) 0px 3px 10px, var(--main-white) 0px 0px 10px, rgb(133, 51, 66) 0px 0px 10px;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
+    margin-top: 25px;
 
     &:hover{
         transform: scale(1.1);
+        color: var(--main-red);
     }
 `
 
 const CloseIcon = styled(FontAwesomeIcon)`
     color: var(--main-red);
+    transition: transform 0.2s ease-in-out;
+
+    &:hover{
+        color: #f72d3f;
+    }
 `
