@@ -10,6 +10,7 @@ import TotalGames from './Components/TotalGames';
 import TotalRounds from './Components/TotalRounds';
 import GameOutCome from './Components/GameOutCome';
 import MatchBoard from './Components/MatchBoard';
+import WinnerPopup from './Components/WinnerPopup';
 
 function App() {
   // Hook para el nombre del jugador
@@ -193,6 +194,7 @@ function App() {
       )}
       <HistoryGames userName={userName} userW={userW} pcW={pcW} />
       <TotalGames userName={userName} totalGames={totalGames} />
+      <WinnerPopup winner={winner}/>
     </div>
   );
 }
