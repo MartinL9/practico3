@@ -21,18 +21,19 @@ Juego de Piedra, Papel o Tijeras hecho con React. Permite al usuario jugar contr
 
 El proyecto está estructurado de la siguiente manera:
 
-- `App.js`: El componente principal que gestiona el estado del juego y renderiza otros componentes.
+- `App.jsx`: El componente principal que gestiona el estado del juego y renderiza otros componentes.
 - `Components/`: Directorio que contiene varios componentes utilizados en el juego.
-  - `Titulo.js`: Muestra el título del juego y un botón de reinicio para comenzar un nuevo juego.
-  - `UserInput.js`: Permite al jugador ingresar su nombre y comenzar el juego.
-  - `Score.js`: Muestra las puntuaciones actuales del jugador y la computadora.
-  - `BtnChoices.js`: Proporciona botones para que el jugador elija su movimiento.
-  - `ResultMatch.js`: Muestra el resultado de cada ronda.
-  - `TotalRounds.js`: Muestra el número de rondas jugadas.
-  - `GameOutCome.js`: Muestra el resultado del juego y permite al jugador reiniciar el juego actual.
-  - `MatchBoard.js`: Muestra las elecciones realizadas por el jugador y la computadora.
-  - `HistoryGames.js`: Muestra el historial de juegos ganados por el jugador y la computadora.
-  - `TotalGames.js`: Muestra el número total de juegos jugados por el jugador.
+  - `Titulo.jsx`: Muestra el título del juego y un botón de reinicio para comenzar un nuevo juego.
+  - `UserInput.jsx`: Permite al jugador ingresar su nombre y comenzar el juego.
+  - `Score.jsx`: Muestra las puntuaciones actuales del jugador y la computadora.
+  - `BtnChoices.jsx`: Proporciona botones para que el jugador elija su movimiento.
+  - `ResultMatch.jsx`: Muestra el resultado de cada ronda.
+  - `TotalRounds.jsx`: Muestra el número de rondas jugadas.
+  - `GameOutCome.jsx`: Muestra el resultado del juego y permite al jugador reiniciar el juego actual.
+  - `MatchBoard.jsx`: Muestra las elecciones realizadas por el jugador y la computadora.
+  - `HistoryGames.jsx`: Muestra el historial de juegos ganados por el jugador y la computadora.
+  - `TotalGames.jsx`: Muestra el número total de juegos jugados por el jugador.
+  - `WinnerPopup.jsx`: Muestra el Popup con el ganador.
 
 ## Problemas Conocidos
 
