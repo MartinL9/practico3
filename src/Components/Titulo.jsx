@@ -15,6 +15,7 @@ function Titulo({ onAllReset }) {
 
 export default Titulo;
 
+// Styled Components
 const Title = styled.div`
     background-color: var(--main-white);
     color: var(--main-gray);

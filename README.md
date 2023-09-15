@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# Juego de Piedra, Papel o Tijeras
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Juego de Piedra, Papel o Tijeras hecho con React. Permite al usuario jugar contra la computadora y llevar un registro de la puntuación, las rondas jugadas y los resultados del juego.
 
-## Available Scripts
+## Cómo Jugar
 
-In the project directory, you can run:
+1. Ingresa tu nombre para comenzar el juego.
+2. Elige tu movimiento haciendo clic en uno de los botones (Piedra, Papel o Tijeras).
+3. La computadora seleccionará aleatoriamente su movimiento.
+4. Se mostrará el resultado de la ronda y se actualizarán las puntuaciones.
+5. El primer jugador en alcanzar una puntuación de 3 gana el juego.
+6. Puedes reiniciar el juego en cualquier momento.
 
-### `npm start`
+## Tecnologías Utilizadas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React
+- JavaScript
+- Styled Components
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Estructura del Proyecto
 
-### `npm test`
+El proyecto está estructurado de la siguiente manera:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `App.js`: El componente principal que gestiona el estado del juego y renderiza otros componentes.
+- `Components/`: Directorio que contiene varios componentes utilizados en el juego.
+  - `Titulo.js`: Muestra el título del juego y un botón de reinicio para comenzar un nuevo juego.
+  - `UserInput.js`: Permite al jugador ingresar su nombre y comenzar el juego.
+  - `Score.js`: Muestra las puntuaciones actuales del jugador y la computadora.
+  - `BtnChoices.js`: Proporciona botones para que el jugador elija su movimiento.
+  - `ResultMatch.js`: Muestra el resultado de cada ronda.
+  - `TotalRounds.js`: Muestra el número de rondas jugadas.
+  - `GameOutCome.js`: Muestra el resultado del juego y permite al jugador reiniciar el juego actual.
+  - `MatchBoard.js`: Muestra las elecciones realizadas por el jugador y la computadora.
+  - `HistoryGames.js`: Muestra el historial de juegos ganados por el jugador y la computadora.
+  - `TotalGames.js`: Muestra el número total de juegos jugados por el jugador.
 
-### `npm run build`
+## Problemas Conocidos
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `Animaciones`: Actualmente, las animaciones en el MatchBoard solo se ejecutan en el primer renderizado del componente y no se repiten en rondas posteriores.
+- `Animaciones de Texto`: Las animaciones de texto en el MatchBoard nunca se ejecutan, lo que puede crear un desfase de elementos en la interfaz.

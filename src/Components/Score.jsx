@@ -19,6 +19,7 @@ function Score({ userName, userScore, pcScore }) {
 
 export default Score;
 
+// Styled Components
 const Container = styled.div`
     max-width: 950px;
     margin: 0 auto;

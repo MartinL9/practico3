@@ -12,25 +12,52 @@ import GameOutCome from './Components/GameOutCome';
 import MatchBoard from './Components/MatchBoard';
 
 function App() {
+  // Hook para el nombre del jugador
   const [userName, setUserName] = useState('');
+
+  // Hook para validar si se ingresó un nombre de usuario
   const [isUsernameValid, setIsUsernameValid] = useState(false);
+
+  // Hook para la elección del jugador
   const [playerChoice, setPlayerChoice] = useState(null);
+
+  // Hook para la elección de la computadora
   const [pcChoice, setPcChoice] = useState(null);
+
+  // Hook para la puntuación del jugador
   const [userScore, setUserScore] = useState(0);
+
+  // Hook para la puntuación de la computadora
   const [pcScore, setPcScore] = useState(0);
+
+  // Hook para rastrear si el jugador ha realizado una elección
   const [hasMadeChoice, setHasMadeChoice] = useState(false);
+
+  // Hook para rastrear el número de rondas jugadas
   const [round, setRound] = useState(0);
+
+  // Hook para determinar al ganador del juego
   const [winner, setWinner] = useState(null);
+
+  // Hook para deshabilitar los botones de elección
   const [btnDisabled, setBtnDisabled] = useState(false);
+
+  // Hook para deshabilitar los botones de elección
   const [totalGames, setTotalGames] = useState(0);
+
+  // Hook para rastrear el número de juegos ganados por el jugador
   const [userW, setUserW] = useState(0);
+
+  // Hook para rastrear el número de juegos ganados por la computadora
   const [pcW, setPcW] = useState(0);
   
+  // Función para iniciar el juego con el nombre del jugador
   const handleStartGame = (playerName) => {
     setUserName(playerName);
     setIsUsernameValid(true);
   }; 
 
+  // Función para determinar el resultado de la ronda
   const detResultWin = (playerChoice, pcChoice) => {
     if(playerChoice === pcChoice) {
       return '¡Empate vuelve a jugar!';
@@ -45,6 +72,7 @@ function App() {
     }
   }
 
+  // Función para manejar la elección del jugador y calcular el resultado
   const handlePlayersChoice = (playerChoice, pcChoice) => {
     setPlayerChoice(playerChoice);
     setPcChoice(pcChoice);
@@ -70,8 +98,9 @@ function App() {
     if (roundResult !== '¡Empate vuelve a jugar!') {
       setRound((prevRound) => prevRound + 1);
     }
-  }
+  };
   
+  // Hook para determinar el ganador del juego y deshabilitar los botones
   useEffect(() => {
     if (userScore === 3) {
       setWinner(userName);
@@ -88,6 +117,7 @@ function App() {
     }
   }, [userName, userScore, pcScore, round, winner]);
   
+    // Hook para rastrear los juegos ganados por el jugador y la computadora
   useEffect(() => {
     if (winner !== null) {
       if (winner === userName) {
@@ -98,6 +128,7 @@ function App() {
     }
   }, [winner, userName]);
 
+    // Función para reiniciar el juego actual
   const handleGameReset = () => {
     setPlayerChoice(null);
     setPcChoice(null);
@@ -109,6 +140,7 @@ function App() {
     setWinner(null);
   }
 
+  // Función para reiniciar todos los datos del juego
   const handleAllReset = () => {
     handleGameReset();
     setUserName('');
@@ -127,7 +159,7 @@ function App() {
         />
       )}
       {hasMadeChoice && (
-        <MatchBoard userChoice={playerChoice} isUser={true} pcChoice={pcChoice} />
+        <MatchBoard userChoice={playerChoice} isUser={true} pcChoice={pcChoice}/>
       )}
       <Score 
         userName={userName} 

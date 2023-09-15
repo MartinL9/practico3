@@ -1,13 +1,18 @@
-    import React from "react";
-    import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-    import {
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
     faHandBackFist,
     faHand,
     faHandScissors,
-    } from "@fortawesome/free-solid-svg-icons";
-    import styled from "styled-components";
+} from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+import {
+    CollisionUserSpan,
+    CollisionUserIcons,
+    CollisionCompIcons,
+} from '../Styles/AnimationMatch';
 
-    const MatchBoard = ({ userChoice, isUser, pcChoice }) => {
+const MatchBoard = ({ userChoice, isUser, pcChoice }) => {
     const getFontAwesomeIcon = (choice) => {
         switch (choice) {
         case "Piedra":
@@ -24,34 +29,55 @@
     return (
         <MatchDiv>
         <SpanChoice>
-            <IconMatch
-            icon={getFontAwesomeIcon(userChoice)}
-            className={isUser ? "fa-flip-horizontal" : ""}
-            />
-            <TextSpan
-            className={userChoice === "Piedra" ? "userR" : userChoice === "Papel" ? "userP" : userChoice === "Tijera" ? "userS" : ""}
-            >
-                {userChoice}
-            </TextSpan>
+            <CollisionUserIcons>
+                <IconMatch
+                    icon={getFontAwesomeIcon(userChoice)}
+                    className={isUser ? "fa-flip-horizontal" : ""}
+                />
+            </CollisionUserIcons>
+            <CollisionUserSpan>
+                <TextSpan
+                    className={
+                        userChoice === "Piedra" 
+                        ? "userR" 
+                        : userChoice === "Papel" 
+                        ? "userP" 
+                        : userChoice === "Tijera" 
+                        ? "userS" 
+                        : ""}
+                >
+                    {userChoice}
+                </TextSpan>
+            </CollisionUserSpan>
         </SpanChoice>
         <VsSpan>VS</VsSpan>
         <SpanChoice>
-            <IconMatch
-            icon={getFontAwesomeIcon(pcChoice)}
-            className={isUser ? "" : "fa-flip-horizontal"}
-            />
+            <CollisionCompIcons>
+                <IconMatch
+                icon={getFontAwesomeIcon(pcChoice)}
+                className={isUser ? "" : "fa-flip-horizontal"}
+                />
+            </CollisionCompIcons>
             <TextSpan
-            className={pcChoice === "Piedra" ? "pcR" : pcChoice === "Papel" ? "pcP" : pcChoice === "Tijera" ? "pcS" : ""}
+                className={
+                    pcChoice === "Piedra" 
+                    ? "pcR" 
+                    : pcChoice === "Papel" 
+                    ? "pcP" 
+                    : pcChoice === "Tijera" 
+                    ? "pcS" 
+                    : ""}
             >
                 {pcChoice}
             </TextSpan>
         </SpanChoice>
         </MatchDiv>
     );
-    };
+};
 
     export default MatchBoard;
 
+    // Styled Components
     const MatchDiv = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

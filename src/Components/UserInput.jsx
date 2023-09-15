@@ -60,6 +60,7 @@ const UserInput = ({ onStartGame }) => {
 
 export default UserInput;
 
+// Styled Components
 const MyDivContainer = styled.div`
     text-align: center;
     margin: 20px auto;

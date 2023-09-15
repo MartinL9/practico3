@@ -32,6 +32,7 @@ function HistoryGames({ userName, userW, pcW }) {
 
 export default HistoryGames;
 
+// Styled Components
 const Container = styled.div`
     max-width: 900px;
     margin: 0 auto;

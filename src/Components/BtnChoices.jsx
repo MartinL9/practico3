@@ -58,6 +58,7 @@ function BtnChoices({ onPlayerChoice, isUsernameValid, btnDisabled }) {
 
 export default BtnChoices;
 
+// Styled Components
 const Container = styled.div`
     max-width: 900px;
     margin: 0 auto;

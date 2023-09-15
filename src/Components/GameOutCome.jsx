@@ -21,6 +21,7 @@ const GameOutcome = ({ userName, winner, onGameReset }) => {
 
 export default GameOutcome;
 
+// Styled Components
 const RePlayBtn = styled.button`
     padding: 6px;
     margin-top: 6px;
