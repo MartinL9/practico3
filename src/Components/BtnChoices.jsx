@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandBackFist, faHand, faHandScissors} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
+// Funcion que genera numeros aleatorios "mejor" que el Math.random dado que usando dicha función me daba la impresion que generaba demasiados empates.
 const randomGenerator = () => {
     let seed = Date.now();
     return () => {
