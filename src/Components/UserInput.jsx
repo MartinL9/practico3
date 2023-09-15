@@ -7,7 +7,7 @@ const UserInput = ({ onStartGame }) => {
     const [playerName, setplayerName] = useState('');
     const [inputError, setInputError] = useState('');
     const [isInputVisible, setInputVisible] = useState(true);
-    const bannedWords = ['asesino', 'asesinato', 'masacre', 'suicido', 'canibal', 'decapitar', 'matar', 'cadaver', 'matanza', 'crucificado','fascista', 'nazi', 'esclavo','hitler'];
+    const bannedWords = ['computadora', 'asesino', 'asesinato', 'masacre', 'suicido', 'canibal', 'decapitar', 'matar', 'cadaver', 'matanza', 'crucificado','fascista', 'nazi', 'esclavo','hitler'];
 
     const handleInputChange = (e) => {
         setplayerName(e.target.value);
