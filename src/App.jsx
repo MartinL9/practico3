@@ -52,7 +52,7 @@ function App() {
   // Hook para rastrear el número de juegos ganados por la computadora
   const [pcW, setPcW] = useState(0);
 
-  // Hook para la activacion de animacion.
+  // Hook para la activación de animación.
   const [animationKey, setAnimationKey] = useState(0);
   
   // Función para iniciar el juego con el nombre del jugador

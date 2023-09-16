@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserXmark } from "@fortawesome/free-solid-svg-icons";
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 function Titulo({ onAllReset }) {
     return (
@@ -16,21 +16,40 @@ function Titulo({ onAllReset }) {
 export default Titulo;
 
 // Styled Components
+const mediaStyles = css`
+    @media screen and (max-width: 768px) {
+        .Title {
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .MyResetAllButton {
+            font-size: 1rem;
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+`;
+
 const Title = styled.div`
     background-color: var(--main-white);
     color: var(--main-gray);
-    margin: 50px auto 50px auto;
-    padding: 20px;
+    margin: 2rem auto;
+    padding: 1rem;  
     width: 43%;
     font-size: 5rem;
+    max-width: 80%;
+    text-align: center;
+
+    ${mediaStyles}
 `;
 
 const MyResetAllButton = styled.button`
     position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 80px;
-    height: 80px;
+    top: 1rem;
+    right: 1rem;
+    width: 5rem;
+    height: 5rem;
     border-radius: 50%;
     margin: 1rem;
     cursor: pointer;
@@ -38,6 +57,8 @@ const MyResetAllButton = styled.button`
     background-color: var(--main-gray);
     color: var(--main-white);
     transition: background-color 0.3s ease-in;
+
+    ${mediaStyles}
 
     &:hover {
         background-color: var(--main-white);
