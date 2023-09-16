@@ -51,6 +51,9 @@ function App() {
 
   // Hook para rastrear el número de juegos ganados por la computadora
   const [pcW, setPcW] = useState(0);
+
+  // Hook para la activacion de animacion.
+  const [animationKey, setAnimationKey] = useState(0);
   
   // Función para iniciar el juego con el nombre del jugador
   const handleStartGame = (playerName) => {
@@ -95,6 +98,7 @@ function App() {
     });
   
     setHasMadeChoice(true);
+    setAnimationKey(animationKey + 1);
 
     if (roundResult !== '¡Empate vuelve a jugar!') {
       setRound((prevRound) => prevRound + 1);
@@ -160,7 +164,7 @@ function App() {
         />
       )}
       {hasMadeChoice && (
-        <MatchBoard userChoice={playerChoice} isUser={true} pcChoice={pcChoice}/>
+        <MatchBoard userChoice={playerChoice} isUser={true} pcChoice={pcChoice} key={animationKey}/>
       )}
       <Score 
         userName={userName} 

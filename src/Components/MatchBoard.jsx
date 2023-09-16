@@ -7,12 +7,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import {
-    CollisionUserSpan,
     CollisionUserIcons,
     CollisionCompIcons,
 } from '../Styles/AnimationMatch';
 
-const MatchBoard = ({ userChoice, isUser, pcChoice }) => {
+const MatchBoard = ({ userChoice, isUser, pcChoice, animationKey }) => {
     const getFontAwesomeIcon = (choice) => {
         switch (choice) {
         case "Piedra":
@@ -29,13 +28,11 @@ const MatchBoard = ({ userChoice, isUser, pcChoice }) => {
     return (
         <MatchDiv>
         <SpanChoice>
-            <CollisionUserIcons>
+            <CollisionUserIcons key={animationKey}>
                 <IconMatch
                     icon={getFontAwesomeIcon(userChoice)}
                     className={isUser ? "fa-flip-horizontal" : ""}
                 />
-            </CollisionUserIcons>
-            <CollisionUserSpan>
                 <TextSpan
                     className={
                         userChoice === "Piedra" 
@@ -48,7 +45,7 @@ const MatchBoard = ({ userChoice, isUser, pcChoice }) => {
                 >
                     {userChoice}
                 </TextSpan>
-            </CollisionUserSpan>
+            </CollisionUserIcons>
         </SpanChoice>
         <VsSpan>VS</VsSpan>
         <SpanChoice>
@@ -57,8 +54,7 @@ const MatchBoard = ({ userChoice, isUser, pcChoice }) => {
                 icon={getFontAwesomeIcon(pcChoice)}
                 className={isUser ? "" : "fa-flip-horizontal"}
                 />
-            </CollisionCompIcons>
-            <TextSpan
+                <TextSpan
                 className={
                     pcChoice === "Piedra" 
                     ? "pcR" 
@@ -67,9 +63,10 @@ const MatchBoard = ({ userChoice, isUser, pcChoice }) => {
                     : pcChoice === "Tijera" 
                     ? "pcS" 
                     : ""}
-            >
-                {pcChoice}
-            </TextSpan>
+                    >
+                    {pcChoice}
+                </TextSpan>
+            </CollisionCompIcons>
         </SpanChoice>
         </MatchDiv>
     );

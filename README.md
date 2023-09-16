@@ -37,5 +37,24 @@ El proyecto está estructurado de la siguiente manera:
 
 ## Problemas Conocidos
 
-- `Animaciones`: Actualmente, las animaciones en el MatchBoard solo se ejecutan en el primer renderizado del componente y no se repiten en rondas posteriores.
-- `Animaciones de Texto`: Las animaciones de texto en el MatchBoard nunca se ejecutan, lo que puede crear un desfase de elementos en la interfaz.
+### Animaciones en el MatchBoard
+
+Actualmente, las animaciones en el componente MatchBoard solo se ejecutan en el primer renderizado del componente y no se repiten en rondas posteriores.
+
+**Solución**: Para solucionar este problema, se ha agregado un hook para la activación de animación. Ahora, las animaciones se pueden reiniciar en cada ronda de la siguiente manera:
+
+```jsx
+// Hook para la activación de animación.
+const [animationKey, setAnimationKey] = useState(0);
+
+// ...
+
+<CollisionUserIcons key={animationKey}>
+
+Esto permite reiniciar las animaciones en cada ronda, asegurando que se ejecuten correctamente.
+
+### Animaciones de Texto en el MatchBoard
+
+Otro problema conocido es que las animaciones de texto en el componente MatchBoard nunca se ejecutan, lo que puede crear un desfase de elementos en la interfaz.
+
+**Solución**: Para solucionar este problema, se ha ajustado la estructura del componente MatchBoard para aplicar la animación directamente al elemento IconMatch, en lugar de usar un contenedor adicional. Esto asegura que tanto el icono como el texto se animen juntos y que el texto permanezca dentro del icono durante la animación.
