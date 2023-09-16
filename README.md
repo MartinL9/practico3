@@ -50,7 +50,7 @@ const [animationKey, setAnimationKey] = useState(0);
 // ...
 
 <CollisionUserIcons key={animationKey}>
-
+```
 Esto permite reiniciar las animaciones en cada ronda, asegurando que se ejecuten correctamente.
 
 ### Animaciones de Texto en el MatchBoard
